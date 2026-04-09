@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사투리 특화 AI 말동무 서비스 — 프로젝트 기획서</title>
+  <style>
+    :root {
+      --navy: #1a2744;
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --blue-bg: #eff6ff;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --amber-50: #fffbeb;
+      --amber-600: #d97706;
+      --green-50: #f0fdf4;
+      --green-600: #16a34a;
+      --red-50: #fef2f2;
+      --red-600: #dc2626;
+      --sidebar-width: 260px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
+      color: var(--gray-800);
+      background: var(--gray-50);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: calc(-1 * var(--sidebar-width));
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--navy);
+      z-index: 1000;
+      transition: left 0.3s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar.open { left: 0; }
+
+    .sidebar-header {
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .sidebar-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.4;
+    }
+    .sidebar-header p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.25rem;
+    }
+
+    .sidebar-nav {
+      padding: 0.75rem 0;
+      flex: 1;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 1.25rem;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav a:hover {
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+    .sidebar-nav a.active {
+      background: rgba(37,99,235,0.2);
+      color: white;
+      border-left-color: var(--blue-light);
+      font-weight: 600;
+    }
+    .sidebar-nav a .nav-icon {
+      font-size: 1.05rem;
+      width: 1.4rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 0.5rem 1.25rem;
+    }
+
+    .sidebar-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+    }
+
+    /* ===== Overlay ===== */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .sidebar-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== Menu Toggle Button ===== */
+    .menu-btn {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1001;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--navy);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.2s;
+    }
+    .menu-btn:hover { background: #243656; }
+    .menu-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .menu-btn span::before,
+    .menu-btn span::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      left: 0;
+      transition: all 0.3s;
+    }
+    .menu-btn span::before { top: -6px; }
+    .menu-btn span::after { top: 6px; }
+
+    /* Hamburger → X animation */
+    .menu-btn.active span { background: transparent; }
+    .menu-btn.active span::before { top: 0; transform: rotate(45deg); }
+    .menu-btn.active span::after { top: 0; transform: rotate(-45deg); }
+
+    /* ===== Header ===== */
+    .header {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 50%, var(--blue) 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .header .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      font-weight: 400;
+    }
+    .header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    /* ===== Layout ===== */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ===== Sections ===== */
+    .section {
+      margin-bottom: 2.5rem;
+      scroll-margin-top: 1.5rem;
+    }
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--navy);
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-title .icon { font-size: 1.3rem; }
+
+    /* Overview box */
+    .overview-box {
+      background: var(--blue-bg);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      font-size: 1rem;
+      color: var(--gray-700);
+      margin-bottom: 2rem;
+    }
+
+    /* Cards grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .card h4 { font-size: 1rem; font-weight: 700; color: var(--blue); margin-bottom: 0.4rem; }
+    .card p { font-size: 0.9rem; color: var(--gray-600); }
+
+    /* Tech stack */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .tech-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .tech-card h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue-light);
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .tech-card .model { font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.4rem; }
+    .tech-card ul { padding-left: 1.2rem; font-size: 0.88rem; color: var(--gray-600); }
+    .tech-card ul li { margin-bottom: 0.25rem; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    thead th {
+      background: var(--navy);
+      color: white;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: left;
+    }
+    tbody td {
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--gray-50); }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem; top: 1.5rem;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+    .timeline-item h4 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .timeline-item p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+
+    /* Tag list */
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .tag {
+      background: var(--blue-bg);
+      color: var(--blue);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid rgba(37,99,235,0.15);
+    }
+
+    /* Phase checklist */
+    .phase {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .phase h4 {
+      font-size: 1rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .phase-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase;
+    }
+    .phase-badge.p1 { background: var(--red-50); color: var(--red-600); }
+    .phase-badge.p2 { background: var(--amber-50); color: var(--amber-600); }
+    .phase-badge.p3 { background: var(--green-50); color: var(--green-600); }
+    .phase ul { list-style: none; padding: 0; }
+    .phase ul li {
+      position: relative;
+      padding: 0.35rem 0 0.35rem 1.6rem;
+      font-size: 0.9rem;
+      color: var(--gray-700);
+    }
+    .phase ul li::before {
+      content: '';
+      position: absolute; left: 0; top: 0.55rem;
+      width: 16px; height: 16px;
+      border: 2px solid var(--gray-300);
+      border-radius: 3px;
+      background: white;
+    }
+
+    /* Alert box */
+    .alert-box {
+      background: var(--amber-50);
+      border: 1px solid #fde68a;
+      border-left: 4px solid var(--amber-600);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+    }
+    .alert-box h4 { color: var(--amber-600); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .alert-box ul { padding-left: 1.2rem; font-size: 0.9rem; color: var(--gray-700); }
+    .alert-box ul li { margin-bottom: 0.3rem; }
+
+    /* Reference list */
+    .ref-list { list-style: none; padding: 0; }
+    .ref-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 0.9rem;
+      color: var(--gray-700);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .ref-list li::before { content: '\1F4D6'; flex-shrink: 0; }
+    .ref-list li:last-child { border-bottom: none; }
+    .ref-list strong { color: var(--gray-800); }
+
+    /* BM highlight */
+    .bm-tag {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      padding: 0.15rem 0.5rem; border-radius: 4px;
+      background: var(--blue-bg); color: var(--blue);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center; padding: 2rem;
+      font-size: 0.8rem; color: var(--gray-600);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    /* ===== Print ===== */
+    @media print {
+      body { background: white; }
+      .header { padding: 2rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .container { padding: 1rem; }
+      .card:hover { box-shadow: none; }
+      .menu-btn, .sidebar, .sidebar-overlay { display: none !important; }
+    }
+
+    /* ===== Mobile ===== */
+    @media (max-width: 640px) {
+      .header h1 { font-size: 1.5rem; }
+      .cards { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .container { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Toggle Button -->
+  <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">
+    <span></span>
+  </button>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>AI 말동무 서비스</h2>
+      <p>프로젝트 기획서</p>
+    </div>
+    <div class="sidebar-nav">
+      <a href="#overview" class="active">
+        <span class="nav-icon">&#128196;</span> 프로젝트 개요
+      </a>
+      <a href="#differentiators">
+        <span class="nav-icon">&#11088;</span> 핵심 차별화
+      </a>
+      <a href="#techstack">
+        <span class="nav-icon">&#9881;</span> 기술 스택
+      </a>
+      <a href="#data">
+        <span class="nav-icon">&#128202;</span> 데이터 리소스
+      </a>
+      <div class="sidebar-divider"></div>
+      <a href="#strategy">
+        <span class="nav-icon">&#128640;</span> 구현 전략
+      </a>
+      <a href="#business">
+        <span class="nav-icon">&#128176;</span> 비즈니스 모델
+      </a>
+      <a href="#expansion">
+        <span class="nav-icon">&#127760;</span> 적용 확장 분야
+      </a>
+      <div class="sidebar-divider"></div>
+      <a href="#todo">
+        <span class="nav-icon">&#9745;</span> 작업 목표 (TODO)
+      </a>
+      <a href="#references">
+        <span class="nav-icon">&#128218;</span> 참고 논문
+      </a>
+      <a href="#principles">
+        <span class="nav-icon">&#9888;</span> 주의사항
+      </a>
+    </div>
+    <div class="sidebar-footer">
+      2026.04 &mdash; v1.0
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>사투리 특화 AI 말동무 서비스</h1>
+    <p class="subtitle">어르신 대상 방언 인식 AI 케어 플랫폼</p>
+    <span class="badge">실버산업 AI 적용 프로젝트</span>
+  </header>
+
+  <div class="container">
+
+    <!-- 프로젝트 개요 -->
+    <div class="section" id="overview">
+      <h2 class="section-title"><span class="icon">&#128196;</span> 프로젝트 개요</h2>
+      <div class="overview-box">
+        실버산업 AI 적용 프로젝트로, 어르신 대상 AI 말동무 서비스에 <strong>사투리 STT/TTS</strong>를 접목해
+        기존 서비스와 차별화된 노인 케어 플랫폼을 개발합니다.
+      </div>
+    </div>
+
+    <!-- 핵심 차별화 포인트 -->
+    <div class="section" id="differentiators">
+      <h2 class="section-title"><span class="icon">&#11088;</span> 핵심 차별화 포인트</h2>
+      <div class="cards">
+        <div class="card">
+          <h4>장기 기억</h4>
+          <p>대화 히스토리를 누적하여 어르신의 인생사와 관심사를 기억하고 맥락 있는 대화를 이어갑니다.</p>
+        </div>
+        <div class="card">
+          <h4>사투리 이해</h4>
+          <p>경상 / 전라 / 충청 / 제주 방언을 인식하고 해당 방언으로 자연스럽게 응답합니다.</p>
+        </div>
+        <div class="card">
+          <h4>가족 연결 3자 구조</h4>
+          <p>어르신 ↔ AI ↔ 가족 앱 연동으로 보호자가 대화 상태를 확인할 수 있습니다.</p>
+        </div>
+        <div class="card">
+          <h4>디지털 회고록</h4>
+          <p>대화 기반으로 어르신의 인생 기록을 자동 생성하여 가족에게 전달합니다.</p>
+        </div>
+        <div class="card">
+          <h4>초저마찰 인터페이스</h4>
+          <p>전화 한 통으로 시작 — 앱 설치나 스마트폰이 필요 없습니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기술 스택 -->
+    <div class="section" id="techstack">
+      <h2 class="section-title"><span class="icon">&#9881;</span> 기술 스택</h2>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h4>STT (Speech-to-Text)</h4>
+          <div class="model">OpenAI Whisper</div>
+          <ul>
+            <li>파인튜닝 가능 오픈소스 모델</li>
+            <li>AI Hub 중·노년층 한국어 방언 데이터 활용</li>
+            <li>경상도 방언 (50대 이상 발화자)</li>
+            <li>충청도·전라도·제주도 방언</li>
+          </ul>
+          <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--gray-600);">
+            <strong>전략:</strong> 범용 STT + 사투리 후처리 정규화 레이어 (단기) → Whisper 파인튜닝 (중기)
+          </p>
+        </div>
+        <div class="tech-card">
+          <h4>LLM</h4>
+          <div class="model">Claude API (claude-sonnet)</div>
+          <ul>
+            <li>사투리 표현 few-shot 예시 포함</li>
+            <li>어르신 말투·관심사 컨텍스트 주입</li>
+            <li>장기 기억 요약 포함</li>
+          </ul>
+        </div>
+        <div class="tech-card">
+          <h4>TTS (Text-to-Speech)</h4>
+          <div class="model">표준어 TTS + 사투리 어미 치환</div>
+          <ul>
+            <li>경상도: ~했심더, ~이라예</li>
+            <li>전라도: ~했제, ~이여</li>
+            <li>충청도: ~했슈, ~이유</li>
+          </ul>
+          <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--gray-600);">
+            <strong>중기:</strong> 사투리 어미 특화 TTS 파인튜닝<br>
+            <strong>장기:</strong> 노인 음성 특징(느린 속도·낮은 음역) 반영 엔드투엔드 모델
+          </p>
+        </div>
+        <div class="tech-card">
+          <h4>인프라</h4>
+          <div class="model">멀티 인터페이스</div>
+          <ul>
+            <li>React Native (모바일 앱 — 가족용)</li>
+            <li>음성 전화 인터페이스 (어르신용)</li>
+            <li>카카오톡 연동 검토</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 데이터 리소스 -->
+    <div class="section" id="data">
+      <h2 class="section-title"><span class="icon">&#128202;</span> 데이터 리소스</h2>
+      <table>
+        <thead>
+          <tr><th>리소스</th><th>출처</th><th>용도</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>중·노년층 방언 데이터 (경상)</td><td>AI Hub</td><td>Whisper STT 파인튜닝</td></tr>
+          <tr><td>중·노년층 방언 데이터 (충청·전라·제주)</td><td>AI Hub</td><td>Whisper STT 파인튜닝</td></tr>
+          <tr><td>한국어 방언 발화 데이터 (5개 권역)</td><td>AI Hub</td><td>Tacotron2 TTS 파인튜닝</td></tr>
+          <tr><td>국립국어원 방언 말뭉치</td><td>국립국어원</td><td>텍스트 기반 사투리 사전 구축</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 구현 전략 -->
+    <div class="section" id="strategy">
+      <h2 class="section-title"><span class="icon">&#128640;</span> 사투리 STT 구현 전략 (단계별)</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>1단계 — MVP (빠른 검증)</h4>
+          <p>
+            범용 Whisper → 사투리 후처리 사전(dict) → LLM → 표준어 TTS<br>
+            어미만 사투리풍으로 조정하여 최소 기능 검증
+          </p>
+        </div>
+        <div class="timeline-item">
+          <h4>2단계 — 차별화</h4>
+          <p>
+            AI Hub 방언 데이터로 Whisper 파인튜닝<br>
+            경상도 우선 → 전라도 → 충청도 순으로 확장
+          </p>
+        </div>
+        <div class="timeline-item">
+          <h4>3단계 — 풀스택</h4>
+          <p>
+            노인 음성 특화 STT (느린 발화·약한 발음 대응)<br>
+            사투리 TTS 파인튜닝 / 특허 출원
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 비즈니스 모델 -->
+    <div class="section" id="business">
+      <h2 class="section-title"><span class="icon">&#128176;</span> 비즈니스 모델</h2>
+      <table>
+        <thead>
+          <tr><th>구분</th><th>내용</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="bm-tag">B2C</span></td><td>가족 구독 (월정액) — "부모님 선물" 포지셔닝</td></tr>
+          <tr><td><span class="bm-tag">B2G</span></td><td>지자체 복지 서비스 납품</td></tr>
+          <tr><td><span class="bm-tag">B2B</span></td><td>요양원·요양병원 케어 솔루션</td></tr>
+          <tr><td><span class="bm-tag">R&amp;D</span></td><td>방언 보존 프로젝트 → 국가 지원금·학술 논문 연계</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 적용 확장 분야 -->
+    <div class="section" id="expansion">
+      <h2 class="section-title"><span class="icon">&#127760;</span> 적용 확장 분야</h2>
+      <div class="tag-list">
+        <span class="tag">공공 민원 ARS</span>
+        <span class="tag">방언 자막 자동 생성</span>
+        <span class="tag">원격 진료 통역 보조</span>
+        <span class="tag">콜센터 AI 자동화</span>
+        <span class="tag">치매 언어 패턴 감지</span>
+        <span class="tag">방언 보존 아카이빙</span>
+      </div>
+    </div>
+
+    <!-- 현재 작업 목표 -->
+    <div class="section" id="todo">
+      <h2 class="section-title"><span class="icon">&#9745;</span> 현재 작업 목표 (TODO)</h2>
+      <div class="phase">
+        <h4><span class="phase-badge p1">Phase 1</span> STT MVP</h4>
+        <ul>
+          <li>AI Hub 방언 데이터 다운로드 및 전처리</li>
+          <li>Whisper base 모델 경상도 방언 파인튜닝</li>
+          <li>사투리 → 표준어 후처리 사전(dict) 구축</li>
+          <li>STT 인식률 벤치마크 (CER 기준)</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h4><span class="phase-badge p2">Phase 2</span> 대화 시스템</h4>
+        <ul>
+          <li>Claude API 사투리 컨텍스트 프롬프트 설계</li>
+          <li>어르신 장기 기억 저장 구조 설계 (대화 요약 → DB)</li>
+          <li>사투리 어미 치환 TTS 레이어 구현</li>
+          <li>전화 인터페이스 프로토타입</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h4><span class="phase-badge p3">Phase 3</span> 가족 앱</h4>
+        <ul>
+          <li>보호자용 모바일 앱 (React Native)</li>
+          <li>일일 대화 요약 리포트</li>
+          <li>디지털 회고록 자동 생성 기능</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 관련 참고 논문 -->
+    <div class="section" id="references">
+      <h2 class="section-title"><span class="icon">&#128218;</span> 관련 참고 논문 / 학술 연구 방향</h2>
+      <ul class="ref-list">
+        <li><strong>방언 STT 파인튜닝</strong> — Whisper 기반 한국어 방언 음성인식 성능 개선 연구</li>
+        <li><strong>노인 음성 특성</strong> — 고령자 발화의 음향·조음 특징 (느린 속도, 약한 자음, 음질 저하)</li>
+        <li><strong>방언 보존</strong> — 소멸 위기 방언(제주어 등) 디지털 아카이빙 관련 연구</li>
+        <li><strong>노인 정신건강</strong> — AI 말동무 서비스의 고독감·우울감 감소 효과 측정</li>
+        <li><strong>딥러닝 기반 한국어 방언 음성인식</strong> — 언어적 특성과 서비스를 고려한 연구 (KoreaScience)</li>
+        <li><strong>중·노년층 방언 화자 음성인식률 향상</strong> — AI Hub 구축 보고서</li>
+      </ul>
+    </div>
+
+    <!-- 주의사항 -->
+    <div class="section" id="principles">
+      <h2 class="section-title"><span class="icon">&#9888;</span> 주의사항 / 개발 원칙</h2>
+      <div class="alert-box">
+        <h4>개발 시 반드시 준수</h4>
+        <ul>
+          <li><strong>어르신 사용자 기준:</strong> 디지털 문맹 가정, UX 극단적 단순화</li>
+          <li><strong>개인정보:</strong> 음성 데이터 로컬 처리 우선, 클라우드 전송 최소화</li>
+          <li><strong>사투리 응답:</strong> 과장되지 않게 — 자연스러운 말투 수준 유지</li>
+          <li><strong>데이터 라이선스:</strong> AI Hub 데이터 상업적 이용 조건 확인 필수</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    사투리 특화 AI 말동무 서비스 &mdash; 프로젝트 기획서 &nbsp;|&nbsp; 2026.04
+  </footer>
+
+  <!-- JavaScript: Sidebar toggle & scroll spy -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      menuBtn.classList.add('active');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      menuBtn.classList.remove('active');
+    }
+
+    menuBtn.addEventListener('click', function () {
+      if (sidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
+
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar on nav link click & smooth scroll
+    navLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        closeSidebar();
+      });
+    });
+
+    // Scroll spy: highlight active nav link
+    const sections = document.querySelectorAll('.section[id]');
+    function updateActiveNav() {
+      var scrollPos = window.scrollY + 100;
+      sections.forEach(function (section) {
+        var top = section.offsetTop;
+        var bottom = top + section.offsetHeight;
+        var id = section.getAttribute('id');
+        var link = document.querySelector('.sidebar-nav a[href="#' + id + '"]');
+        if (link) {
+          if (scrollPos >= top && scrollPos < bottom) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Close sidebar on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeSidebar();
+    });
+  </script>
+
+</body>
+</html>
