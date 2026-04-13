@@ -429,13 +429,39 @@
       border-top: 1px solid var(--gray-200);
     }
 
+    /* ===== PDF Download Button ===== */
+    .pdf-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--navy);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .pdf-btn:hover { background: #243656; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .pdf-btn:active { transform: translateY(0); }
+    .pdf-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .pdf-btn.loading { opacity: 0.7; pointer-events: none; }
+
     /* ===== Print ===== */
     @media print {
       body { background: white; }
       .header { padding: 2rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .container { padding: 1rem; }
       .card:hover { box-shadow: none; }
-      .menu-btn, .sidebar, .sidebar-overlay { display: none !important; }
+      .menu-btn, .sidebar, .sidebar-overlay, .pdf-btn { display: none !important; }
     }
 
     /* ===== Mobile ===== */
@@ -485,6 +511,13 @@
       </a>
       <a href="#expansion">
         <span class="nav-icon">&#127760;</span> 적용 확장 분야
+      </a>
+      <div class="sidebar-divider"></div>
+      <a href="#pipeline">
+        <span class="nav-icon">&#128222;</span> Voice AI 파이프라인
+      </a>
+      <a href="#cost">
+        <span class="nav-icon">&#128178;</span> 운영 비용
       </a>
       <div class="sidebar-divider"></div>
       <a href="#todo">
@@ -541,8 +574,8 @@
           <p>대화 기반으로 어르신의 인생 기록을 자동 생성하여 가족에게 전달합니다.</p>
         </div>
         <div class="card">
-          <h4>초저마찰 인터페이스</h4>
-          <p>전화 한 통으로 시작 — 앱 설치나 스마트폰이 필요 없습니다.</p>
+          <h4>양방향 전화 인터페이스</h4>
+          <p><strong>메인:</strong> AI가 매일 정해진 시간에 먼저 전화 (Outbound)<br><strong>서브:</strong> 어르신이 원할 때 언제든 전화 가능 (Inbound)<br>앱 설치·스마트폰 불필요, 일반 전화기만으로 사용</p>
         </div>
       </div>
     </div>
@@ -553,12 +586,12 @@
       <div class="tech-grid">
         <div class="tech-card">
           <h4>STT (Speech-to-Text)</h4>
-          <div class="model">OpenAI Whisper</div>
+          <div class="model">OpenAI Whisper + Deepgram</div>
           <ul>
-            <li>파인튜닝 가능 오픈소스 모델</li>
+            <li>Whisper: 파인튜닝 가능 오픈소스 (방언 특화)</li>
+            <li>Deepgram: 8kHz 전화 음질 최적화, 실시간 스트리밍</li>
             <li>AI Hub 중·노년층 한국어 방언 데이터 활용</li>
-            <li>경상도 방언 (50대 이상 발화자)</li>
-            <li>충청도·전라도·제주도 방언</li>
+            <li>경상도·충청도·전라도·제주도 방언</li>
           </ul>
           <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--gray-600);">
             <strong>전략:</strong> 범용 STT + 사투리 후처리 정규화 레이어 (단기) → Whisper 파인튜닝 (중기)
@@ -566,8 +599,9 @@
         </div>
         <div class="tech-card">
           <h4>LLM</h4>
-          <div class="model">Claude API (claude-sonnet)</div>
+          <div class="model">Claude API (claude-haiku)</div>
           <ul>
+            <li>빠른 응답 우선 (~800ms)</li>
             <li>사투리 표현 few-shot 예시 포함</li>
             <li>어르신 말투·관심사 컨텍스트 주입</li>
             <li>장기 기억 요약 포함</li>
@@ -575,7 +609,7 @@
         </div>
         <div class="tech-card">
           <h4>TTS (Text-to-Speech)</h4>
-          <div class="model">표준어 TTS + 사투리 어미 치환</div>
+          <div class="model">Clova Voice + 사투리 어미 치환</div>
           <ul>
             <li>경상도: ~했심더, ~이라예</li>
             <li>전라도: ~했제, ~이여</li>
@@ -588,11 +622,13 @@
         </div>
         <div class="tech-card">
           <h4>인프라</h4>
-          <div class="model">멀티 인터페이스</div>
+          <div class="model">Twilio 양방향 전화 + FastAPI</div>
           <ul>
-            <li>React Native (모바일 앱 — 가족용)</li>
-            <li>음성 전화 인터페이스 (어르신용)</li>
-            <li>카카오톡 연동 검토</li>
+            <li>Twilio Outbound/Inbound Call API</li>
+            <li>APScheduler 기반 발신 스케줄러</li>
+            <li>FastAPI + WebSocket 서버</li>
+            <li>PostgreSQL (대화 요약·감정 저장)</li>
+            <li>React Native (가족 앱)</li>
           </ul>
         </div>
       </div>
@@ -671,6 +707,74 @@
       </div>
     </div>
 
+    <!-- Voice AI 파이프라인 -->
+    <div class="section" id="pipeline">
+      <h2 class="section-title"><span class="icon">&#128222;</span> Voice AI 파이프라인 (양방향 전화)</h2>
+      <div class="cards" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h4>[메인] Outbound — AI가 먼저 전화</h4>
+          <p>
+            스케줄러 (매일 오전 10시)<br>
+            &darr;<br>
+            Twilio Outbound Call → 어르신 전화 발신<br>
+            &darr;<br>
+            어르신 수신 → 대화 시작
+          </p>
+        </div>
+        <div class="card">
+          <h4>[서브] Inbound — 어르신이 전화</h4>
+          <p>
+            어르신이 서비스 번호로 전화<br>
+            &darr;<br>
+            Twilio Inbound 수신 → 대화 시작
+          </p>
+        </div>
+      </div>
+      <div class="overview-box" style="margin-top:1rem;">
+        <strong>공통 대화 흐름:</strong>&nbsp;
+        대화 시작 → STT (Deepgram, 8kHz) → LLM (Claude Haiku) → TTS (Clova Voice + 사투리 어미) → 음성 응답 → 대화 종료 → DB 저장 (요약 + 감정) → 가족 앱 리포트
+      </div>
+      <table>
+        <thead><tr><th>시나리오</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>정기 안부</td><td>매일 오전 10시 발신</td></tr>
+          <tr><td>복약 알림</td><td>"어르신, 약 드실 시간이에요"</td></tr>
+          <tr><td>기념일 케어</td><td>"오늘 손녀 생일이라고 하셨잖아요~"</td></tr>
+          <tr><td>미수신 감지</td><td>2회 이상 무응답 → 가족/복지사 자동 알림</td></tr>
+          <tr><td>감정 이상 감지</td><td>부정적 발화 패턴 → 가족에게 알림</td></tr>
+        </tbody>
+      </table>
+      <div class="overview-box" style="margin-top:1rem;">
+        <strong>지연시간 목표:</strong>&nbsp;
+        STT ~300ms + LLM ~800ms + TTS ~200ms = <strong>합계 ~1.3초</strong> (어르신 허용 범위 2초 이내)
+      </div>
+    </div>
+
+    <!-- 운영 비용 구조 -->
+    <div class="section" id="cost">
+      <h2 class="section-title"><span class="icon">&#128178;</span> 운영 비용 구조</h2>
+      <table>
+        <thead><tr><th>항목</th><th>서비스</th><th>Outbound</th><th>Inbound</th></tr></thead>
+        <tbody>
+          <tr><td>전화</td><td>Twilio</td><td>~18원/분</td><td>~12원/분</td></tr>
+          <tr><td>STT</td><td>Deepgram</td><td>~20원/분</td><td>~20원/분</td></tr>
+          <tr><td>LLM</td><td>Claude Haiku</td><td>~15원/분</td><td>~15원/분</td></tr>
+          <tr><td>TTS</td><td>Clova Voice</td><td>~10원/분</td><td>~10원/분</td></tr>
+          <tr style="font-weight:700;"><td>합계</td><td></td><td>~63원/분</td><td>~57원/분</td></tr>
+        </tbody>
+      </table>
+      <div class="cards" style="grid-template-columns: 1fr 1fr; margin-top:1rem;">
+        <div class="card">
+          <h4>월 고정비</h4>
+          <p>서버 (AWS/Railway): 약 3~5만원<br>DB (PostgreSQL): 약 1~2만원<br>전화번호 유지: 약 1,500원<br><strong>합계: 약 4~7만원</strong></p>
+        </div>
+        <div class="card">
+          <h4>손익분기점 (100명, 1인 하루 10분)</h4>
+          <p>변동비: 63원 x 10분 x 100명 x 30일 = 189,000원<br>고정비: 약 50,000원<br>총 원가: 약 24만원/월 → 1인당 약 2,400원<br><strong>구독료 월 5,000~10,000원 → 수익 확보</strong></p>
+        </div>
+      </div>
+    </div>
+
     <!-- 현재 작업 목표 -->
     <div class="section" id="todo">
       <h2 class="section-title"><span class="icon">&#9745;</span> 현재 작업 목표 (TODO)</h2>
@@ -684,12 +788,16 @@
         </ul>
       </div>
       <div class="phase">
-        <h4><span class="phase-badge p2">Phase 2</span> 대화 시스템</h4>
+        <h4><span class="phase-badge p2">Phase 2</span> 대화 시스템 (양방향 전화)</h4>
         <ul>
+          <li>Twilio Outbound Call API 연동 (메인)</li>
+          <li>Twilio Inbound Call API 연동 (서브)</li>
+          <li>APScheduler 기반 발신 스케줄러 구현</li>
+          <li>미수신 감지 → 가족 알림 로직</li>
           <li>Claude API 사투리 컨텍스트 프롬프트 설계</li>
           <li>어르신 장기 기억 저장 구조 설계 (대화 요약 → DB)</li>
           <li>사투리 어미 치환 TTS 레이어 구현</li>
-          <li>전화 인터페이스 프로토타입</li>
+          <li>Deepgram STT 전화 음질(8kHz) 연동</li>
         </ul>
       </div>
       <div class="phase">
@@ -725,6 +833,7 @@
           <li><strong>개인정보:</strong> 음성 데이터 로컬 처리 우선, 클라우드 전송 최소화</li>
           <li><strong>사투리 응답:</strong> 과장되지 않게 — 자연스러운 말투 수준 유지</li>
           <li><strong>데이터 라이선스:</strong> AI Hub 데이터 상업적 이용 조건 확인 필수</li>
+          <li><strong>Twilio 한국 번호:</strong> 등록 시간 여유 두고 진행 (수일 소요 가능)</li>
         </ul>
       </div>
     </div>
@@ -734,6 +843,49 @@
   <footer class="footer">
     사투리 특화 AI 말동무 서비스 &mdash; 프로젝트 기획서 &nbsp;|&nbsp; 2026.04
   </footer>
+
+  <!-- PDF Download Button -->
+  <button class="pdf-btn" id="pdfBtn" onclick="downloadPDF()">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm3-3h6v-1.5H9V17zm0-3h6v-1.5H9V14zm0-3h4v-1.5H9V11z"/></svg>
+    PDF 다운로드
+  </button>
+
+  <!-- html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      var btn = document.getElementById('pdfBtn');
+      btn.classList.add('loading');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 2v4m0 12v4m-7.07-3.93l2.83-2.83m8.48-8.48l2.83-2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83"/></svg> 생성 중...';
+
+      // Hide sidebar, menu, pdf button for capture
+      var sidebar = document.getElementById('sidebar');
+      var menuBtn = document.getElementById('menuBtn');
+      var overlay = document.getElementById('sidebarOverlay');
+      sidebar.style.display = 'none';
+      menuBtn.style.display = 'none';
+      overlay.style.display = 'none';
+      btn.style.display = 'none';
+
+      var element = document.documentElement.cloneNode(true);
+
+      html2pdf().set({
+        margin: [10, 10, 10, 10],
+        filename: '사투리_AI_말동무_프로젝트_기획서.pdf',
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      }).from(document.body).save().then(function() {
+        sidebar.style.display = '';
+        menuBtn.style.display = '';
+        overlay.style.display = '';
+        btn.style.display = '';
+        btn.classList.remove('loading');
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm3-3h6v-1.5H9V17zm0-3h6v-1.5H9V14zm0-3h4v-1.5H9V11z"/></svg> PDF 다운로드';
+      });
+    }
+  </script>
 
   <!-- JavaScript: Sidebar toggle & scroll spy -->
   <script>

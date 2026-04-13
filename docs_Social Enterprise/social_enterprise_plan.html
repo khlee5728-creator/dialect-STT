@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 사회적기업 창업지원사업 — 사업계획서</title>
+  <style>
+    @page { size: A4; margin: 20mm 18mm; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      font-size: 10.5pt;
+      line-height: 1.7;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Cover */
+    .cover {
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .cover .doc-label {
+      font-size: 10pt;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    .cover h1 {
+      font-size: 20pt;
+      font-weight: 800;
+      color: #14532d;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .cover .sub {
+      font-size: 13pt;
+      color: #166534;
+      margin-bottom: 2rem;
+    }
+    .cover .date {
+      font-size: 12pt;
+      color: #333;
+      margin-bottom: 2.5rem;
+    }
+    .cover-table {
+      border-collapse: collapse;
+      width: 440px;
+      margin: 0 auto;
+    }
+    .cover-table th {
+      background: #14532d;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 10pt;
+      font-weight: 600;
+      text-align: left;
+      width: 140px;
+      border: 1px solid #14532d;
+    }
+    .cover-table td {
+      padding: 0.5rem 1rem;
+      font-size: 10pt;
+      border: 1px solid #cbd5e1;
+      background: #f0fdf4;
+    }
+    .cover .type-label {
+      margin-top: 1.5rem;
+      font-size: 10.5pt;
+    }
+    .cover .type-check {
+      margin-top: 0.3rem;
+      font-size: 10.5pt;
+    }
+
+    /* Content */
+    .content {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Sections */
+    h2 {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #14532d;
+      border-bottom: 2.5px solid #16a34a;
+      padding-bottom: 0.3rem;
+      margin: 1.8rem 0 0.8rem;
+    }
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #166534;
+      margin: 1rem 0 0.4rem;
+    }
+    h4 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0.8rem 0 0.3rem;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0 1rem;
+      font-size: 9.5pt;
+    }
+    table th {
+      background: #f0fdf4;
+      color: #14532d;
+      font-weight: 700;
+      padding: 0.4rem 0.6rem;
+      text-align: left;
+      border: 1px solid #bbf7d0;
+    }
+    table td {
+      padding: 0.4rem 0.6rem;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    /* Field tables */
+    .field-table th { width: 140px; }
+
+    /* Check */
+    .check { color: #16a34a; font-weight: 700; }
+    .uncheck { color: #94a3b8; }
+
+    /* Highlight box */
+    .highlight-box {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      border-radius: 0 8px 8px 0;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem 0 1rem;
+      font-size: 10pt;
+    }
+    .highlight-box b { color: #14532d; }
+
+    /* Warning box */
+    .social-value-box {
+      background: #fefce8;
+      border-left: 4px solid #ca8a04;
+      border-radius: 0 8px 8px 0;
+      padding: 0.8rem 1rem;
+      margin: 0.5rem 0 1rem;
+      font-size: 10pt;
+    }
+
+    /* Lists */
+    ul, ol { padding-left: 1.5rem; margin: 0.3rem 0; }
+    li { margin-bottom: 0.2rem; }
+
+    /* Numbered items */
+    .num-item {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.4rem 0;
+      align-items: flex-start;
+    }
+    .num-badge {
+      background: #16a34a;
+      color: white;
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    /* Page break */
+    .page-break { page-break-before: always; }
+
+    /* PDF Download Button */
+    .pdf-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #14532d;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .pdf-btn:hover { background: #166534; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .pdf-btn:active { transform: translateY(0); }
+    .pdf-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .pdf-btn.loading { opacity: 0.7; pointer-events: none; }
+
+    /* Print */
+    @media print {
+      body { font-size: 10pt; }
+      .cover { min-height: auto; padding: 6rem 2rem; }
+      .content { padding: 0; }
+      .pdf-btn { display: none !important; }
+    }
+
+    /* Screen */
+    @media screen {
+      body { background: #f0f0f0; }
+      .cover, .content { background: white; }
+      .cover { max-width: 700px; margin: 2rem auto; padding: 5rem 2rem; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
+      .content { max-width: 700px; margin: 1rem auto 3rem; padding: 2rem; box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 표지 ===== -->
+  <div class="cover">
+    <p class="doc-label">2026년 사회적기업 창업지원사업</p>
+    <h1>참여개요 및 사업계획서</h1>
+    <p class="sub">사투리 특화 AI 말동무 서비스 — 어르신 정서 케어 플랫폼</p>
+    <p class="date">2026. 04.</p>
+
+    <table class="cover-table">
+      <tr><th>사업 아이템명</th><td>사투리 특화 AI 말동무 서비스</td></tr>
+      <tr><th>신청유형</th><td><span class="check">[V]</span> 초기창업형 &nbsp; <span class="uncheck">[&nbsp;&nbsp;]</span> 인증전환형 &nbsp; <span class="uncheck">[&nbsp;&nbsp;]</span> 재도전형</td></tr>
+      <tr><th>창업팀 대표</th><td>&nbsp;</td></tr>
+      <tr><th>창업팀 인원</th><td>&nbsp;명 (대표 포함)</td></tr>
+      <tr><th>희망 창업지원기관</th><td>&nbsp;</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== 본문 ===== -->
+  <div class="content">
+
+    <!-- 1. 참여 개요 -->
+    <h2>1. 참여 개요</h2>
+
+    <h3>1.1 창업 아이템 요약</h3>
+    <div class="highlight-box">
+      어르신 대상 <b>사투리(방언) 음성인식 AI 말동무 서비스</b>를 개발하여,
+      독거노인의 고독감·우울감을 해소하고, 소멸 위기 방언을 보존하며,
+      가족과의 유대를 강화하는 <b>사회서비스제공형 사회적기업</b>을 설립합니다.
+      AI가 매일 정해진 시간에 먼저 전화하는 <b>양방향 전화 인터페이스</b>로 앱 설치 없이 일반 전화기만으로 이용 가능합니다.
+    </div>
+
+    <h3>1.2 사회적 목적</h3>
+    <table class="field-table">
+      <tr><th>사회적 문제</th><td>독거노인 약 190만 명의 사회적 고립 및 정서적 소외. 기존 AI 음성 서비스는 표준어 중심으로 방언을 사용하는 어르신에게 접근성이 낮음. 디지털 기기를 다루지 못하는 어르신은 서비스 이용 자체가 불가능.</td></tr>
+      <tr><th>해결 방안</th><td>AI가 매일 먼저 전화하는 양방향 전화 서비스(Outbound 메인 + Inbound 서브). 앱 설치 불필요, 일반 전화기만으로 이용. 경상/전라/충청/제주 사투리를 이해하고 방언으로 응답. 미수신 감지 시 가족/복지사에 자동 알림. 대화 내용을 가족에게 전달하여 돌봄 사각지대 해소.</td></tr>
+      <tr><th>사회적기업 유형</th><td><b>사회서비스제공형</b> — 취약계층(독거노인, 고령자)에 정서 케어 서비스 제공</td></tr>
+    </table>
+
+    <h3>1.3 사회적 가치 창출 목표</h3>
+    <div class="social-value-box">
+      <b>핵심 사회적 가치 3가지:</b><br>
+      1) 어르신 고독감·우울감 경감 (정서 케어)<br>
+      2) 소멸 위기 방언 디지털 보존 (문화 보존)<br>
+      3) 가족-어르신 유대 강화 및 돌봄 사각지대 해소 (복지 연결)
+    </div>
+
+    <!-- 2. 사업 계획 -->
+    <h2>2. 사업 계획</h2>
+
+    <h3>2.1 서비스 내용</h3>
+    <table>
+      <tr><th>서비스</th><th>대상</th><th>내용</th></tr>
+      <tr><td>AI 양방향 전화</td><td>어르신 (직접)</td><td><b>메인:</b> AI가 매일 오전 정해진 시간에 먼저 전화 (Outbound)<br><b>서브:</b> 어르신이 원할 때 언제든 전화 (Inbound)<br>정기 안부, 복약 알림, 기념일 케어, 일상 대화</td></tr>
+      <tr><td>미수신 감지 알림</td><td>가족/복지사</td><td>2회 이상 무응답 시 가족 앱 및 복지사에 자동 알림</td></tr>
+      <tr><td>일일 대화 리포트</td><td>가족 (보호자)</td><td>어르신 감정 상태, 대화 주제, 건강 관련 언급 요약 제공</td></tr>
+      <tr><td>감정 이상 감지</td><td>가족 (보호자)</td><td>부정적 발화 패턴 감지 시 가족에게 즉시 알림</td></tr>
+      <tr><td>디지털 회고록</td><td>가족 (보호자)</td><td>대화 기반 어르신 인생 기록 자동 생성 및 전달</td></tr>
+      <tr><td>정서 모니터링</td><td>요양시설/지자체</td><td>다수 이용자 감정 추이 대시보드, 위험 신호 알림</td></tr>
+    </table>
+
+    <h3>2.2 기술 차별화</h3>
+    <table>
+      <tr><th>기존 서비스의 한계</th><th>우리 서비스의 해결책</th></tr>
+      <tr><td>표준어 기반 — 방언 인식률 낮음</td><td>경상/전라/충청/제주 4대 방언 전용 STT (Deepgram + Whisper 파인튜닝)</td></tr>
+      <tr><td>일회성 대화 — 맥락 유지 안 됨</td><td>장기 기억 아키텍처로 수개월 대화 맥락 유지</td></tr>
+      <tr><td>어르신이 직접 전화해야 함</td><td>AI가 매일 먼저 전화 (Outbound) + 어르신도 언제든 전화 가능 (Inbound)</td></tr>
+      <tr><td>앱 설치 필요 — 디지털 문맹 이용 불가</td><td>일반 전화기만으로 이용, 스마트폰 불필요</td></tr>
+      <tr><td>무응답 시 방치</td><td>미수신 2회 → 가족/복지사 자동 알림, 감정 이상 감지</td></tr>
+      <tr><td>어르신만 대상 — 가족 연결 없음</td><td>어르신 ↔ AI ↔ 가족 3자 연동 구조</td></tr>
+    </table>
+
+    <h3>2.3 핵심 기술 구조</h3>
+    <table>
+      <tr><th>구성요소</th><th>기술</th><th>역할</th></tr>
+      <tr><td>STT (음성→텍스트)</td><td>Deepgram (8kHz 실시간) + Whisper (방언 파인튜닝)</td><td>전화 음질 최적화, 어르신 사투리 음성 인식</td></tr>
+      <tr><td>후처리 레이어</td><td>사투리 정규화 사전</td><td>방언 → 표준어 매핑</td></tr>
+      <tr><td>대화 AI</td><td>Claude API (Haiku) + 장기 기억 DB</td><td>빠른 응답 (~800ms), 맥락 대화, 감정 분석</td></tr>
+      <tr><td>TTS (텍스트→음성)</td><td>Clova Voice + 사투리 어미 치환</td><td>자연스러운 방언 응답</td></tr>
+      <tr><td>전화 시스템</td><td>Twilio 양방향 API + APScheduler</td><td>Outbound 자동 발신, Inbound 수신, 미수신 감지</td></tr>
+      <tr><td>서버</td><td>FastAPI + WebSocket + PostgreSQL</td><td>실시간 통신, 대화 요약·감정 상태 저장</td></tr>
+      <tr><td>가족 앱</td><td>React Native</td><td>대화 요약, 회고록, 미수신·감정 이상 알림</td></tr>
+    </table>
+
+    <!-- 3. 사회적기업 진입 계획 -->
+    <h2 class="page-break">3. (예비)사회적기업 인증 진입 계획</h2>
+
+    <h3>3.1 인증 목표 유형</h3>
+    <table class="field-table">
+      <tr><th>인증 유형</th><td><b>사회서비스제공형</b></td></tr>
+      <tr><th>취약계층 대상</th><td>65세 이상 독거노인, 요양시설 거주 어르신, 디지털 소외 고령자</td></tr>
+      <tr><th>사회서비스 내용</th><td>방언 기반 AI 정서 케어 서비스 (전화 대화, 감정 모니터링, 가족 리포트)</td></tr>
+      <tr><th>사회적 목적 실현</th><td>전체 이용자의 50% 이상을 취약계층(독거노인) 대상 무료/저가 제공</td></tr>
+    </table>
+
+    <h3>3.2 조직 구조 및 운영 계획</h3>
+    <table>
+      <tr><th>구분</th><th>계획</th></tr>
+      <tr><td>법인 형태</td><td>주식회사 (사회적기업 인증 후 정관에 사회적 목적 명시)</td></tr>
+      <tr><td>의사결정</td><td>이해관계자 참여: 이용자(어르신/가족) 대표, 지역 복지기관, 기술팀 포함 이사회 구성</td></tr>
+      <tr><td>수익 재투자</td><td>영업이익의 2/3 이상을 사회적 목적에 재투자 (서비스 확대, 방언 보존, 무료 이용자 확대)</td></tr>
+      <tr><td>고용 계획</td><td>사투리 데이터 라벨링·검수 인력 → 지역 중장년/노인 일자리 연계 (사회적 고용 창출)</td></tr>
+    </table>
+
+    <h3>3.3 (예비)사회적기업 인증 로드맵</h3>
+    <table>
+      <tr><th>시기</th><th>목표</th><th>내용</th></tr>
+      <tr><td>1~3개월</td><td>법인 설립</td><td>주식회사 설립, 정관에 사회적 목적 명시, 사업자등록</td></tr>
+      <tr><td>4~6개월</td><td>서비스 MVP 출시</td><td>방언 STT MVP, 전화 인터페이스 프로토타입, 시범 이용자 확보</td></tr>
+      <tr><td>7~9개월</td><td>예비사회적기업 지정</td><td>지자체 예비사회적기업 신청, 취약계층 이용자 50% 이상 확보</td></tr>
+      <tr><td>10~12개월</td><td>사업 안정화</td><td>유료 구독 모델 운영, B2G 지자체 납품 추진, 사회적기업 인증 준비</td></tr>
+    </table>
+
+    <!-- 4. 수익 모델 및 지속가능성 -->
+    <h2>4. 수익 모델 및 지속가능성</h2>
+
+    <h3>4.1 비즈니스 모델</h3>
+    <table>
+      <tr><th>채널</th><th>대상</th><th>수익 모델</th><th>사회적 가치</th></tr>
+      <tr><td><b>B2C</b></td><td>가족 (자녀 세대)</td><td>월정액 구독<br>"부모님 선물" 포지셔닝</td><td>가족 유대 강화, 어르신 정서 케어</td></tr>
+      <tr><td><b>B2G</b></td><td>지자체</td><td>복지 서비스 납품<br>(독거노인 돌봄 사업 연계)</td><td>공공 복지 사각지대 해소</td></tr>
+      <tr><td><b>B2B</b></td><td>요양원/요양병원</td><td>기관용 라이선스<br>(다수 이용자 관리)</td><td>요양 시설 케어 품질 향상</td></tr>
+      <tr><td><b>R&D</b></td><td>학술/정부</td><td>방언 보존 프로젝트<br>국가 지원금·논문 연계</td><td>소멸 위기 방언 디지털 보존</td></tr>
+    </table>
+
+    <h3>4.2 매출 전망 (연간)</h3>
+    <table>
+      <tr><th>구분</th><th>1차년도</th><th>2차년도</th><th>3차년도</th></tr>
+      <tr><td>B2C 가족 구독</td><td>이용자 확보 단계</td><td>유료 전환 시작</td><td>월 구독자 확대</td></tr>
+      <tr><td>B2G 지자체 납품</td><td>시범사업 참여</td><td>1~2개 지자체 계약</td><td>전국 확대</td></tr>
+      <tr><td>B2B 요양시설</td><td>-</td><td>파일럿 도입</td><td>기관 라이선스 확대</td></tr>
+      <tr><td>R&D 지원금</td><td>창업지원금</td><td>방언 보존 R&D</td><td>기술 사업화 지원</td></tr>
+    </table>
+
+    <h3>4.3 지속가능성 확보 방안</h3>
+    <ul>
+      <li><b>공공 수요 기반</b>: 독거노인 돌봄은 지자체 필수 복지 사업 → 안정적 B2G 수요</li>
+      <li><b>감정적 전환비용</b>: 어르신이 AI 말동무와 형성한 장기 기억·유대감은 서비스 전환을 어렵게 하여 높은 유지율 기대</li>
+      <li><b>기술 진입장벽</b>: 방언 STT 파인튜닝 데이터 + 노하우 축적으로 후발주자 진입 어려움</li>
+      <li><b>사회적 가치 재투자</b>: 영업이익의 2/3 이상을 무료 이용자 확대, 방언 보존 프로젝트에 재투자</li>
+    </ul>
+
+    <!-- 5. 사회적 성과 측정 -->
+    <h2 class="page-break">5. 사회적 성과 측정 계획</h2>
+
+    <h3>5.1 핵심 성과 지표 (KPI)</h3>
+    <table>
+      <tr><th>지표</th><th>측정 방법</th><th>1차년도 목표</th></tr>
+      <tr><td>취약계층 이용자 수</td><td>65세 이상 독거노인 등록 수</td><td>100명 이상</td></tr>
+      <tr><td>고독감 경감 효과</td><td>UCLA 고독감 척도 사전·사후 비교</td><td>평균 10% 개선</td></tr>
+      <tr><td>가족 연결 활성화</td><td>가족 앱 활성 이용률 (주 1회 이상 열람)</td><td>60% 이상</td></tr>
+      <tr><td>방언 데이터 축적</td><td>누적 방언 음성 데이터 시간</td><td>500시간 이상</td></tr>
+      <tr><td>사회적 고용</td><td>방언 라벨링 인력 중 취약계층 비율</td><td>50% 이상</td></tr>
+    </table>
+
+    <h3>5.2 사회적 영향력 측정</h3>
+    <ul>
+      <li><b>정서 케어</b>: 이용자 정기 설문 (고독감, 생활 만족도, AI 서비스 만족도)</li>
+      <li><b>가족 연결</b>: 가족 앱 이용 데이터, 어르신-가족 소통 빈도 변화 추적</li>
+      <li><b>방언 보존</b>: 누적 방언 음성 데이터량, 학술 논문·보고서 발간 건수</li>
+      <li><b>고용 효과</b>: 직접 고용 인원, 취약계층 고용 비율, 지역사회 일자리 연계 건수</li>
+    </ul>
+
+    <!-- 6. 창업팀 역량 -->
+    <h2>6. 창업팀 역량</h2>
+
+    <h3>6.1 팀 구성</h3>
+    <table>
+      <tr><th>역할</th><th>담당 업무</th><th>핵심 역량</th></tr>
+      <tr><td>대표 (기획/PM)</td><td>사업 기획, 파트너십, 사회적기업 인증 추진</td><td>사회적 가치 기획, 실버 산업 이해</td></tr>
+      <tr><td>AI 개발자</td><td>STT 파인튜닝, LLM 프롬프트 설계, 백엔드</td><td>음성인식, NLP, 파이썬 개발</td></tr>
+      <tr><td>앱 개발자</td><td>가족 앱 (React Native), 전화 인터페이스</td><td>모바일 앱, 통신 연동</td></tr>
+      <tr><td>데이터/방언 전문</td><td>방언 데이터 수집·라벨링, 사투리 사전 구축</td><td>국어학, 방언학, 데이터 분석</td></tr>
+    </table>
+
+    <h3>6.2 외부 협력 계획</h3>
+    <ul>
+      <li><b>AI Hub</b>: 중·노년층 방언 데이터 활용 (경상/전라/충청/제주)</li>
+      <li><b>국립국어원</b>: 방언 말뭉치 데이터 연계, 학술 자문</li>
+      <li><b>지역 복지관</b>: 시범 서비스 이용자 모집, 현장 피드백</li>
+      <li><b>지자체 노인돌봄센터</b>: B2G 서비스 시범 도입 파트너</li>
+      <li><b>요양시설</b>: B2B 파일럿 프로그램 운영</li>
+    </ul>
+
+    <!-- 7. 창업지원금 활용 계획 -->
+    <h2>7. 창업지원금 활용 계획</h2>
+
+    <table>
+      <tr><th>항목</th><th>내용</th><th>비율</th></tr>
+      <tr><td>기술 개발비</td><td>GPU 서버 임대, AI Hub 데이터 전처리, Whisper 파인튜닝, Twilio 연동, 앱 개발</td><td>40%</td></tr>
+      <tr><td>인건비</td><td>방언 데이터 라벨링 인력 (지역 중장년 우선 채용), 개발 인력</td><td>30%</td></tr>
+      <tr><td>서비스 운영비</td><td>Twilio 전화비(Outbound ~63원/분, Inbound ~57원/분), Deepgram·Claude·Clova API, 클라우드 인프라 (월 고정비 약 4~7만원)</td><td>15%</td></tr>
+      <tr><td>마케팅/홍보</td><td>지자체 연계 홍보, 복지관 현장 설명회, 가족 대상 온라인 마케팅</td><td>10%</td></tr>
+      <tr><td>법인 설립/운영</td><td>법인 등기, 사무실 임대, 회계/법무</td><td>5%</td></tr>
+    </table>
+
+    <!-- 8. 기대 효과 -->
+    <h2>8. 기대 효과</h2>
+
+    <h3>8.1 사회적 기대 효과</h3>
+    <ul>
+      <li><b>독거노인 정서 케어</b>: AI가 매일 먼저 전화하여 정기 안부·복약 알림·기념일 케어 → 고독감·우울감 경감</li>
+      <li><b>돌봄 사각지대 해소</b>: 미수신 2회 시 가족/복지사 자동 알림, 감정 이상 감지 → 원거리 보호자도 실시간 파악</li>
+      <li><b>방언 보존</b>: 소멸 위기 방언(제주어 등)의 음성 데이터 디지털 아카이빙</li>
+      <li><b>사회적 고용</b>: 방언 데이터 라벨링·검수 업무를 지역 중장년/시니어에게 제공하여 일자리 창출</li>
+      <li><b>디지털 포용</b>: 양방향 전화 인터페이스로 스마트폰 없이 AI 서비스 이용, 디지털 소외 해소</li>
+      <li><b>비용 효율성</b>: 1인당 월 약 2,400원 원가 (100명 기준, 1일 10분) → 공공 복지 예산 대비 높은 효율</li>
+    </ul>
+
+    <h3>8.2 산업적 기대 효과</h3>
+    <ul>
+      <li><b>실버케어 AI 시장 개척</b>: 방언 특화 음성인식이라는 새로운 시장 카테고리 형성</li>
+      <li><b>공공 복지 효율화</b>: 지자체 독거노인 돌봄 사업에 AI 기술 도입으로 비용 대비 효과 극대화</li>
+      <li><b>기술 확장성</b>: 방언 STT/TTS 기술의 공공 민원 ARS, 방언 자막, 원격 진료 등 타 분야 확장</li>
+    </ul>
+
+  </div>
+
+  <!-- PDF Download Button -->
+  <button class="pdf-btn" id="pdfBtn" onclick="downloadPDF()">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm3-3h6v-1.5H9V17zm0-3h6v-1.5H9V14zm0-3h4v-1.5H9V11z"/></svg>
+    PDF 다운로드
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      var btn = document.getElementById('pdfBtn');
+      btn.classList.add('loading');
+      btn.textContent = '생성 중...';
+      btn.style.display = 'none';
+
+      html2pdf().set({
+        margin: [15, 12, 15, 12],
+        filename: '사회적기업_사업계획서_사투리AI말동무.pdf',
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      }).from(document.body).save().then(function() {
+        btn.style.display = '';
+        btn.classList.remove('loading');
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm3-3h6v-1.5H9V17zm0-3h6v-1.5H9V14zm0-3h4v-1.5H9V11z"/></svg> PDF 다운로드';
+      });
+    }
+  </script>
+
+</body>
+</html>
