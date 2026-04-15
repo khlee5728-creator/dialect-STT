@@ -490,14 +490,27 @@
       <p>프로젝트 기획서</p>
     </div>
     <div class="sidebar-nav">
-      <a href="#overview" class="active">
-        <span class="nav-icon">&#128196;</span> 프로젝트 개요
+      <a href="#strategy-vision" class="active">
+        <span class="nav-icon">&#127919;</span> 프로젝트 전략
+      </a>
+      <a href="#overview">
+        <span class="nav-icon">&#128196;</span> 서비스 개요
       </a>
       <a href="#differentiators">
         <span class="nav-icon">&#11088;</span> 핵심 차별화
       </a>
+      <a href="#interface">
+        <span class="nav-icon">&#128241;</span> 인터페이스 전략
+      </a>
+      <div class="sidebar-divider"></div>
       <a href="#techstack">
         <span class="nav-icon">&#9881;</span> 기술 스택
+      </a>
+      <a href="#pipeline">
+        <span class="nav-icon">&#128222;</span> Voice AI 파이프라인
+      </a>
+      <a href="#notification">
+        <span class="nav-icon">&#128276;</span> 알림 시스템
       </a>
       <a href="#data">
         <span class="nav-icon">&#128202;</span> 데이터 리소스
@@ -509,15 +522,11 @@
       <a href="#business">
         <span class="nav-icon">&#128176;</span> 비즈니스 모델
       </a>
-      <a href="#expansion">
-        <span class="nav-icon">&#127760;</span> 적용 확장 분야
-      </a>
-      <div class="sidebar-divider"></div>
-      <a href="#pipeline">
-        <span class="nav-icon">&#128222;</span> Voice AI 파이프라인
-      </a>
       <a href="#cost">
         <span class="nav-icon">&#128178;</span> 운영 비용
+      </a>
+      <a href="#expansion">
+        <span class="nav-icon">&#127760;</span> 적용 확장 분야
       </a>
       <div class="sidebar-divider"></div>
       <a href="#todo">
@@ -544,13 +553,57 @@
 
   <div class="container">
 
-    <!-- 프로젝트 개요 -->
+    <!-- 프로젝트 전략 방향 -->
+    <div class="section" id="strategy-vision">
+      <h2 class="section-title"><span class="icon">&#127919;</span> 프로젝트 전략 방향</h2>
+      <div class="overview-box" style="background:#fef3c7; border-left-color:#d97706;">
+        <strong style="color:#92400e; font-size:1.05rem;">국내 유일 사투리 특화 AI 말동무 서비스</strong><br><br>
+        기존 노인 돌봄 AI가 해결하지 못한 두 가지 문제를 동시에 해결합니다.
+        <ul style="margin-top:0.6rem; padding-left:1.2rem;">
+          <li><strong>언어 장벽</strong>: 표준어 중심 AI는 사투리를 쓰는 어르신과 제대로 대화하지 못함</li>
+          <li><strong>관계 단절</strong>: 주 1회 3분짜리 안부 확인은 진짜 말동무가 될 수 없음</li>
+        </ul>
+        <p style="margin-top:0.8rem;">사투리 STT/TTS 기술을 자체 개발·고도화하며, 서비스 운영을 통해 축적되는 실사용 데이터가 기술 경쟁력을 지속적으로 강화합니다. 장기적으로는 사투리 음성 AI 기술을 디바이스·플랫폼 파트너에게 공급하는 <strong>기술 기반 서비스 회사</strong>로 성장합니다.</p>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.5rem 0 0.6rem;">전략 로드맵</h3>
+      <div class="cards" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card">
+          <h4>1단계 — 서비스 출시·검증</h4>
+          <p>사투리 STT 자체 개발 (경상도 우선)로 기술 차별화 확보<br>전화 기반 AI 말동무 서비스 출시<br>어르신·가족·지자체 레퍼런스 확보<br>실사용 대화 데이터 축적 → 기술 고도화 재료</p>
+        </div>
+        <div class="card">
+          <h4>2단계 — 동시 고도화 (6개월~1년)</h4>
+          <p>실사용 데이터 기반 사투리 STT 전 권역 확장<br>가족 앱 출시<br>디바이스 파트너십 협의 시작</p>
+        </div>
+        <div class="card">
+          <h4>3단계 — 기술 사업화 (장기)</h4>
+          <p>사투리 음성 AI API 외부 공급 (효돌㈜ 등)<br>지자체 화이트라벨 납품<br>특허 기반 기술 라이선싱</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 서비스 개요 -->
     <div class="section" id="overview">
-      <h2 class="section-title"><span class="icon">&#128196;</span> 프로젝트 개요</h2>
+      <h2 class="section-title"><span class="icon">&#128196;</span> 서비스 개요</h2>
       <div class="overview-box">
         실버산업 AI 적용 프로젝트로, 어르신 대상 AI 말동무 서비스에 <strong>사투리 STT/TTS</strong>를 접목해
         기존 서비스와 차별화된 노인 케어 플랫폼을 개발합니다.
       </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.5rem 0 0.6rem;">기존 서비스와의 차별화</h3>
+      <table>
+        <thead>
+          <tr><th>항목</th><th>기존 서비스 (효돌, KT AI케어 등)</th><th>우리 서비스</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>대화 빈도</td><td>주 1회 안부 전화, 3분 수준</td><td>매일 충분한 대화</td></tr>
+          <tr><td>언어</td><td>표준어 중심</td><td>사투리 이해·응답</td></tr>
+          <tr><td>대화 기억</td><td>대화 내용 휘발</td><td>장기 기억 누적</td></tr>
+          <tr><td>대상</td><td>어르신만 대상</td><td>어르신 + 가족 3자 연결</td></tr>
+          <tr><td>대화 방식</td><td>정해진 스크립트</td><td>맥락 있는 자연스러운 대화</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- 핵심 차별화 포인트 -->
@@ -578,6 +631,46 @@
           <p><strong>메인:</strong> AI가 매일 정해진 시간에 먼저 전화 (Outbound)<br><strong>서브:</strong> 어르신이 원할 때 언제든 전화 가능 (Inbound)<br>앱 설치·스마트폰 불필요, 일반 전화기만으로 사용</p>
         </div>
       </div>
+    </div>
+
+    <!-- 인터페이스 전략 -->
+    <div class="section" id="interface">
+      <h2 class="section-title"><span class="icon">&#128241;</span> 인터페이스 전략</h2>
+
+      <div class="cards" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h4>MVP — 전화 (즉시 출시 가능)</h4>
+          <p>
+            하드웨어 불필요, 기술 검증에 집중<br>
+            어르신이 이미 익숙한 전화기 활용<br>
+            B2G 납품 시 디바이스 없이 바로 계약 가능<br>
+            <strong style="color:#d97706;">단점 인지:</strong> 전화가 rapport 형성에 한계 → 2단계에서 보완
+          </p>
+        </div>
+        <div class="card">
+          <h4>2단계 — 디바이스 확장 (파트너십)</h4>
+          <p>
+            직접 제조 없이 기존 업체와 협력<br>
+            • 효돌㈜에 사투리 STT/TTS 기술 탑재 협의<br>
+            • TV 셋톱박스 앱 (KT/SK/LG)<br>
+            • 스마트 액자·AI 스피커 연동<br>
+            <strong>핵심:</strong> 디바이스를 만드는 게 아니라 기술을 얹는 구조
+          </p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.5rem 0 0.6rem;">인터페이스별 특성</h3>
+      <table>
+        <thead>
+          <tr><th>인터페이스</th><th>Rapport</th><th>접근성</th><th>비용</th><th>시점</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>전화</td><td>&#11088;&#11088;</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>최저</td><td>MVP</td></tr>
+          <tr><td>TV 앱</td><td>&#11088;&#11088;&#11088;</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>낮음</td><td>2단계</td></tr>
+          <tr><td>인형 디바이스</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>&#11088;&#11088;&#11088;</td><td>높음</td><td>파트너십</td></tr>
+          <tr><td>카카오톡</td><td>&#11088;&#11088;</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>최저</td><td>보조채널</td></tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- 기술 스택 -->
@@ -611,9 +704,9 @@
           <h4>TTS (Text-to-Speech)</h4>
           <div class="model">Clova Voice + 사투리 어미 치환</div>
           <ul>
-            <li>경상도: ~했심더, ~이라예</li>
-            <li>전라도: ~했제, ~이여</li>
-            <li>충청도: ~했슈, ~이유</li>
+            <li>경상도: ~했심더, ~이라예, ~했능교</li>
+            <li>전라도: ~했제, ~이여, ~했당께</li>
+            <li>충청도: ~했슈, ~이유, ~했쥬</li>
           </ul>
           <p style="margin-top:0.6rem;font-size:0.85rem;color:var(--gray-600);">
             <strong>중기:</strong> 사투리 어미 특화 TTS 파인튜닝<br>
@@ -639,13 +732,14 @@
       <h2 class="section-title"><span class="icon">&#128202;</span> 데이터 리소스</h2>
       <table>
         <thead>
-          <tr><th>리소스</th><th>출처</th><th>용도</th></tr>
+          <tr><th>리소스</th><th>출처</th><th>용도</th><th>시점</th></tr>
         </thead>
         <tbody>
-          <tr><td>중·노년층 방언 데이터 (경상)</td><td>AI Hub</td><td>Whisper STT 파인튜닝</td></tr>
-          <tr><td>중·노년층 방언 데이터 (충청·전라·제주)</td><td>AI Hub</td><td>Whisper STT 파인튜닝</td></tr>
-          <tr><td>한국어 방언 발화 데이터 (5개 권역)</td><td>AI Hub</td><td>Tacotron2 TTS 파인튜닝</td></tr>
-          <tr><td>국립국어원 방언 말뭉치</td><td>국립국어원</td><td>텍스트 기반 사투리 사전 구축</td></tr>
+          <tr><td>중·노년층 방언 데이터 (경상)</td><td>AI Hub</td><td>Whisper STT 파인튜닝</td><td>2단계</td></tr>
+          <tr><td>중·노년층 방언 데이터 (충청·전라·제주)</td><td>AI Hub</td><td>Whisper STT 파인튜닝</td><td>2단계</td></tr>
+          <tr><td>한국어 방언 발화 데이터 (5개 권역)</td><td>AI Hub</td><td>TTS 파인튜닝</td><td>3단계</td></tr>
+          <tr><td>국립국어원 방언 말뭉치</td><td>국립국어원</td><td>사투리 후처리 사전 구축</td><td>MVP</td></tr>
+          <tr style="background:#fef3c7;"><td><strong>실사용 대화 데이터</strong></td><td>서비스 운영</td><td><strong>모델 지속 개선 (핵심 자산)</strong></td><td>전 단계</td></tr>
         </tbody>
       </table>
     </div>
@@ -655,24 +749,28 @@
       <h2 class="section-title"><span class="icon">&#128640;</span> 사투리 STT 구현 전략 (단계별)</h2>
       <div class="timeline">
         <div class="timeline-item">
-          <h4>1단계 — MVP (빠른 검증)</h4>
+          <h4>MVP — 기본 파인튜닝 + 후처리 병행 (차별화 확보)</h4>
           <p>
-            범용 Whisper → 사투리 후처리 사전(dict) → LLM → 표준어 TTS<br>
-            어미만 사투리풍으로 조정하여 최소 기능 검증
+            AI Hub 경상도 방언 데이터 → Whisper 기본 파인튜닝 (1개 권역)<br>
+            + 사투리→표준어 후처리 사전으로 인식률 보완<br>
+            → LLM → 사투리 어미 TTS<br>
+            <em>※ 완벽하지 않아도 됨 — 타 서비스 대비 사투리 인식 자체가 차별점</em>
           </p>
         </div>
         <div class="timeline-item">
-          <h4>2단계 — 차별화</h4>
+          <h4>2단계 — 파인튜닝 확장 (실사용 데이터 추가)</h4>
           <p>
-            AI Hub 방언 데이터로 Whisper 파인튜닝<br>
-            경상도 우선 → 전라도 → 충청도 순으로 확장
+            AI Hub 전 권역 데이터 + 실사용 데이터 → Whisper 파인튜닝 고도화<br>
+            전라도 → 충청도 → 제주도 순차 확장<br>
+            인식률 벤치마크 (CER 기준) 지속 측정
           </p>
         </div>
         <div class="timeline-item">
-          <h4>3단계 — 풀스택</h4>
+          <h4>3단계 — 풀스택 고도화 (서비스 안정화 후)</h4>
           <p>
             노인 음성 특화 STT (느린 발화·약한 발음 대응)<br>
-            사투리 TTS 파인튜닝 / 특허 출원
+            사투리 TTS 파인튜닝<br>
+            특허 출원 → 외부 API 공급 검토
           </p>
         </div>
       </div>
@@ -681,15 +779,28 @@
     <!-- 비즈니스 모델 -->
     <div class="section" id="business">
       <h2 class="section-title"><span class="icon">&#128176;</span> 비즈니스 모델</h2>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 0.6rem;">메인 수익 (서비스)</h3>
       <table>
         <thead>
-          <tr><th>구분</th><th>내용</th></tr>
+          <tr><th>구분</th><th>내용</th><th>시점</th></tr>
         </thead>
         <tbody>
-          <tr><td><span class="bm-tag">B2C</span></td><td>가족 구독 (월정액) — "부모님 선물" 포지셔닝</td></tr>
-          <tr><td><span class="bm-tag">B2G</span></td><td>지자체 복지 서비스 납품</td></tr>
-          <tr><td><span class="bm-tag">B2B</span></td><td>요양원·요양병원 케어 솔루션</td></tr>
-          <tr><td><span class="bm-tag">R&amp;D</span></td><td>방언 보존 프로젝트 → 국가 지원금·학술 논문 연계</td></tr>
+          <tr><td><span class="bm-tag">B2C</span></td><td>가족 구독 월정액 — "부모님 선물" 포지셔닝</td><td>MVP</td></tr>
+          <tr><td><span class="bm-tag">B2G</span></td><td>지자체 복지 서비스 화이트라벨 납품</td><td>1단계</td></tr>
+          <tr><td><span class="bm-tag">B2B</span></td><td>요양원·요양병원 케어 솔루션</td><td>2단계</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">장기 수익 옵션 (기술)</h3>
+      <table>
+        <thead>
+          <tr><th>구분</th><th>내용</th><th>시점</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="bm-tag">기술 API</span></td><td>사투리 STT/TTS API 외부 공급</td><td>3단계</td></tr>
+          <tr><td><span class="bm-tag">OEM</span></td><td>효돌 등 디바이스 업체에 기술 탑재</td><td>3단계</td></tr>
+          <tr><td><span class="bm-tag">R&amp;D</span></td><td>방언 보존 국가 지원금·학술 연계</td><td>3단계</td></tr>
         </tbody>
       </table>
     </div>
@@ -750,6 +861,74 @@
       </div>
     </div>
 
+    <!-- 알림 시스템 -->
+    <div class="section" id="notification">
+      <h2 class="section-title"><span class="icon">&#128276;</span> 알림 시스템 (가족·복지사)</h2>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 0.6rem;">알림 트리거</h3>
+      <div class="cards" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="card">
+          <h4>① 미수신 감지</h4>
+          <p>2회 이상 전화 안 받음</p>
+        </div>
+        <div class="card">
+          <h4>② 감정 이상 감지</h4>
+          <p>"외롭다", "살기 싫다" 등 부정적 발화 패턴</p>
+        </div>
+        <div class="card">
+          <h4>③ 일일 리포트</h4>
+          <p>매일 대화 종료 후 요약 자동 전송</p>
+        </div>
+        <div class="card">
+          <h4>④ 장기 미응답</h4>
+          <p>며칠째 대화 없음 (고독사 예방)</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">알림 채널 전략 (MVP)</h3>
+      <table>
+        <thead>
+          <tr><th>채널</th><th>구현 난이도</th><th>친숙도</th><th>MVP 적합성</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:#fef3c7;"><td><strong>카카오 알림톡</strong></td><td>쉬움</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>&#9989; 1순위 (건당 8~15원)</td></tr>
+          <tr><td><strong>SMS (Twilio)</strong></td><td>매우 쉬움</td><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>&#9989; fallback</td></tr>
+          <tr><td>앱 푸시 (React Native)</td><td>중간</td><td>&#11088;&#11088;&#11088;</td><td>2단계</td></tr>
+          <tr><td>이메일</td><td>매우 쉬움</td><td>&#11088;&#11088;</td><td>보조</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">알림 메시지 예시</h3>
+      <div class="cards" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h4>① 미수신 알림</h4>
+          <p style="font-size:0.85rem; line-height:1.5;">[AI 말동무] 홍길동 어르신께 오전 10시, 10시 15분 두 차례 전화를 드렸으나 받지 않으셨어요. 직접 확인해 보시겠어요?</p>
+        </div>
+        <div class="card">
+          <h4>② 감정 이상 감지</h4>
+          <p style="font-size:0.85rem; line-height:1.5;">[AI 말동무] 오늘 홍길동 어르신과의 대화에서 평소와 다른 표현이 감지되었어요. 대화 요약 보기 → [링크]</p>
+        </div>
+        <div class="card">
+          <h4>③ 일일 리포트</h4>
+          <p style="font-size:0.85rem; line-height:1.5;">[AI 말동무] 오늘 홍길동 어르신 대화 요약 — 통화시간: 12분 | 기분: 좋음<br>"손녀 결혼식 얘기를 많이 하셨어요"</p>
+        </div>
+        <div class="card">
+          <h4>④ 장기 미응답 알림</h4>
+          <p style="font-size:0.85rem; line-height:1.5;">[AI 말동무] 홍길동 어르신과 3일째 대화가 이루어지지 않고 있어요. 안부 확인이 필요할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">감정 분석 기준 (LLM 프롬프트)</h3>
+      <table>
+        <tbody>
+          <tr><th style="width:160px;">부정적 감지어</th><td>"외롭다", "힘들다", "살기 싫다", "아프다", "무섭다"</td></tr>
+          <tr><th>위기 감지어</th><td>"죽고 싶다", "아무도 없다", "밥을 못 먹었다"</td></tr>
+          <tr><th>감정 상태 분류</th><td>positive / neutral / negative / <strong style="color:#dc2626;">alert</strong></td></tr>
+          <tr><th>대응</th><td><strong>alert 감지 시</strong> 즉시 가족·복지사에게 알림 발송</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- 운영 비용 구조 -->
     <div class="section" id="cost">
       <h2 class="section-title"><span class="icon">&#128178;</span> 운영 비용 구조</h2>
@@ -779,33 +958,40 @@
     <div class="section" id="todo">
       <h2 class="section-title"><span class="icon">&#9745;</span> 현재 작업 목표 (TODO)</h2>
       <div class="phase">
-        <h4><span class="phase-badge p1">Phase 1</span> STT MVP</h4>
+        <h4><span class="phase-badge p1">Phase 1</span> MVP 출시 (전화 기반 + 기본 사투리 파인튜닝)</h4>
         <ul>
-          <li>AI Hub 방언 데이터 다운로드 및 전처리</li>
-          <li>Whisper base 모델 경상도 방언 파인튜닝</li>
-          <li>사투리 → 표준어 후처리 사전(dict) 구축</li>
-          <li>STT 인식률 벤치마크 (CER 기준)</li>
-        </ul>
-      </div>
-      <div class="phase">
-        <h4><span class="phase-badge p2">Phase 2</span> 대화 시스템 (양방향 전화)</h4>
-        <ul>
-          <li>Twilio Outbound Call API 연동 (메인)</li>
-          <li>Twilio Inbound Call API 연동 (서브)</li>
+          <li>AI Hub 경상도 방언 데이터 다운로드 및 전처리</li>
+          <li>Whisper 경상도 방언 기본 파인튜닝</li>
+          <li>국립국어원 방언 말뭉치로 사투리→표준어 후처리 사전 구축</li>
+          <li>STT 인식률 초기 벤치마크 (CER 기준)</li>
+          <li>Twilio Outbound/Inbound Call API 연동</li>
           <li>APScheduler 기반 발신 스케줄러 구현</li>
-          <li>미수신 감지 → 가족 알림 로직</li>
-          <li>Claude API 사투리 컨텍스트 프롬프트 설계</li>
-          <li>어르신 장기 기억 저장 구조 설계 (대화 요약 → DB)</li>
-          <li>사투리 어미 치환 TTS 레이어 구현</li>
+          <li>Claude API 사투리 컨텍스트 + 장기 기억 프롬프트 설계</li>
+          <li>Clova Voice + 사투리 어미 치환 TTS 레이어 구현</li>
           <li>Deepgram STT 전화 음질(8kHz) 연동</li>
+          <li>미수신 감지 → 가족 알림 로직 (카카오 알림톡 + SMS fallback)</li>
+          <li>대화 요약 → DB 저장 구조 설계</li>
         </ul>
       </div>
       <div class="phase">
-        <h4><span class="phase-badge p3">Phase 3</span> 가족 앱</h4>
+        <h4><span class="phase-badge p2">Phase 2</span> 서비스 고도화</h4>
         <ul>
+          <li>AI Hub 방언 데이터로 Whisper 파인튜닝 (전 권역 확장)</li>
+          <li>STT 인식률 벤치마크 (CER 기준 지속 측정)</li>
           <li>보호자용 모바일 앱 (React Native)</li>
           <li>일일 대화 요약 리포트</li>
           <li>디지털 회고록 자동 생성 기능</li>
+          <li>TV 앱 또는 카카오톡 보조 채널 추가</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <h4><span class="phase-badge p3">Phase 3</span> 기술 사업화 (장기)</h4>
+        <ul>
+          <li>노인 음성 특화 STT 고도화</li>
+          <li>사투리 TTS 파인튜닝</li>
+          <li>특허 출원</li>
+          <li>효돌㈜ 등 디바이스 파트너십 협의</li>
+          <li>외부 API 플랫폼 구축</li>
         </ul>
       </div>
     </div>
@@ -829,9 +1015,11 @@
       <div class="alert-box">
         <h4>개발 시 반드시 준수</h4>
         <ul>
+          <li><strong>서비스 우선:</strong> 기술 완성을 기다리지 말고 현재 가능한 수준으로 빠르게 출시</li>
+          <li><strong>데이터가 핵심 자산:</strong> 실사용 대화 데이터 축적이 장기 경쟁력</li>
           <li><strong>어르신 사용자 기준:</strong> 디지털 문맹 가정, UX 극단적 단순화</li>
-          <li><strong>개인정보:</strong> 음성 데이터 로컬 처리 우선, 클라우드 전송 최소화</li>
           <li><strong>사투리 응답:</strong> 과장되지 않게 — 자연스러운 말투 수준 유지</li>
+          <li><strong>개인정보:</strong> 음성 데이터 로컬 처리 우선, 클라우드 전송 최소화</li>
           <li><strong>데이터 라이선스:</strong> AI Hub 데이터 상업적 이용 조건 확인 필수</li>
           <li><strong>Twilio 한국 번호:</strong> 등록 시간 여유 두고 진행 (수일 소요 가능)</li>
         </ul>
