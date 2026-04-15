@@ -509,6 +509,9 @@
       <a href="#pipeline">
         <span class="nav-icon">&#128222;</span> Voice AI 파이프라인
       </a>
+      <a href="#dialog-design">
+        <span class="nav-icon">&#128172;</span> AI 대화 기획
+      </a>
       <a href="#notification">
         <span class="nav-icon">&#128276;</span> 알림 시스템
       </a>
@@ -858,6 +861,135 @@
       <div class="overview-box" style="margin-top:1rem;">
         <strong>지연시간 목표:</strong>&nbsp;
         STT ~300ms + LLM ~800ms + TTS ~200ms = <strong>합계 ~1.3초</strong> (어르신 허용 범위 2초 이내)
+      </div>
+    </div>
+
+    <!-- AI 대화 기획 -->
+    <div class="section" id="dialog-design">
+      <h2 class="section-title"><span class="icon">&#128172;</span> AI 대화 기획</h2>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 0.6rem;">페르소나 설정</h3>
+      <table>
+        <tbody>
+          <tr><th style="width:130px;">캐릭터</th><td>친근한 손녀·손자 같은 젊은이</td></tr>
+          <tr><th>말투</th><td>사투리 권역별 맞춤 + 존댓말 기반의 따뜻하고 편안한 어조</td></tr>
+          <tr><th>이름</th><td>지역별 친근한 이름 설정 가능 (예: "하늘이", "봄이") — 지자체 화이트라벨 납품 시 커스터마이징 가능</td></tr>
+          <tr><th>태도</th><td>
+            · 항상 먼저 안부를 묻고 어르신 말을 충분히 들음<br>
+            · 절대 서두르지 않음 — 어르신 발화 속도에 맞춤<br>
+            · 어르신이 틀린 말을 해도 교정하지 않음<br>
+            · 걱정·불안 표현 시 공감 먼저, 해결책 나중
+          </td></tr>
+          <tr style="background:#fef2f2;"><th style="color:#dc2626;">금지 행동</th><td>
+            · "잠깐만요", "빠르게 말씀드리면" 등 재촉하는 표현 금지<br>
+            · 너무 많은 질문을 한꺼번에 던지지 않음 (한 번에 하나씩)<br>
+            · 어르신이 반복되는 이야기를 해도 처음 듣는 것처럼 반응
+          </td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">대화 구조 (하루 1회 / 10~15분)</h3>
+      <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div class="card">
+          <h4>1단계 — 오프닝 (1~2분)</h4>
+          <p>AI가 먼저 전화 → 인사 + 날씨·계절 안부<br><em style="color:#475569; font-size:0.85rem;">"어르신, 저 하늘이예요~ 오늘 날씨가 많이 쌀쌀하던데 따뜻하게 계셨어예?"</em></p>
+        </div>
+        <div class="card">
+          <h4>2단계 — 감정 체크 (2~3분)</h4>
+          <p>어르신 기분·컨디션 파악, 어제 대화 기억 기반으로 자연스럽게 연결<br><em style="color:#475569; font-size:0.85rem;">"어제 무릎이 좀 아프시다고 하셨는데, 오늘은 좀 어떠세예?"</em></p>
+        </div>
+        <div class="card">
+          <h4>3단계 — 메인 대화 (5~8분)</h4>
+          <p>그날의 콘텐츠 테마에 따라 진행, 어르신이 주도하면 자연스럽게 따라감</p>
+        </div>
+        <div class="card">
+          <h4>4단계 — 건강·복약 체크 (1~2분)</h4>
+          <p>식사 여부, 복약 확인을 자연스럽게 대화 속에 녹임<br><em style="color:#475569; font-size:0.85rem;">"오늘 점심은 맛있는 거 드셨어예? 약도 챙겨 드셨죠?"</em></p>
+        </div>
+        <div class="card">
+          <h4>5단계 — 클로징 (1분)</h4>
+          <p>가족 근황 한 마디 전달 + 다음 통화 예고<br><em style="color:#475569; font-size:0.85rem;">"아드님이 이번 주말에 찾아뵌다고 했어예~ 내일 또 전화드릴게예!"</em></p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">대화 콘텐츠 테마 (요일별 순환)</h3>
+      <table>
+        <thead>
+          <tr><th>요일</th><th>테마</th><th>예시 대화 소재</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>월</strong></td><td>일상 안부·감정 케어</td><td>주말 어떻게 보내셨어요, 요즘 기분은요</td></tr>
+          <tr><td><strong>화</strong></td><td>인생 회상</td><td>젊었을 때 직업·고향·첫사랑 이야기</td></tr>
+          <tr><td><strong>수</strong></td><td>인지 훈련</td><td>옛날 노래 맞히기, 계절 퀴즈, 숫자 기억</td></tr>
+          <tr><td><strong>목</strong></td><td>가족 근황 연결</td><td>자녀·손자녀 소식 전달, 가족 사진 이야기</td></tr>
+          <tr><td><strong>금</strong></td><td>건강·일상 관리</td><td>식사, 수면, 산책, 복약 점검</td></tr>
+          <tr><td><strong>토</strong></td><td>인생 회고록 기록</td><td>이번 주 있었던 일 정리, 기억에 남는 순간</td></tr>
+          <tr><td><strong>일</strong></td><td>자유 대화</td><td>어르신이 하고 싶은 이야기 주도</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">콘텐츠별 세부 설계</h3>
+      <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+        <div class="card">
+          <h4>① 일상 안부·감정 케어</h4>
+          <p>매일 오프닝·클로징 기본 포함. 직접 "기분이 어때요?" 대신 상황으로 유도. 부정적 감정 감지 시 공감 대화 → 감정 완화 후 주제 전환. 위기 표현 감지 시 알림 시스템 연동.</p>
+        </div>
+        <div class="card">
+          <h4>② 인생 회상·회고록 기록</h4>
+          <p>고향 → 어린 시절 → 학창시절 → 직업 → 결혼 → 자녀 양육 → 기억에 남는 순간 → 인생의 지혜. 자동 텍스트 저장 → 회고록 누적, 주간 가족 리포트 발송.</p>
+        </div>
+        <div class="card">
+          <h4>③ 인지 훈련 (치매 예방)</h4>
+          <p>게임처럼 자연스럽게 — 테스트 느낌 금지. 회상 훈련, 언어 훈련(노래·속담), 지남력 훈련(날짜·계절), 주의력 훈련(끝말잇기). 인지 반응 패턴 DB 저장 → 장기 추이 모니터링.</p>
+        </div>
+        <div class="card">
+          <h4>④ 건강·복약 관리</h4>
+          <p>대화 중 자연스럽게 체크. 식사·수면·통증·복약·외출 점검. 이상 패턴 감지 시 가족 알림 (예: "3일 연속 밥을 못 드셨다").</p>
+        </div>
+        <div class="card">
+          <h4>⑤ 가족 근황 연결</h4>
+          <p>가족 앱에서 보호자가 입력한 소식을 AI가 대화 중 자연스럽게 전달. 어르신이 가족에게 전하고 싶은 말을 AI가 받아서 가족 앱으로 전달.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">장기 기억 구조</h3>
+      <div class="cards" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card">
+          <h4>기본 프로필</h4>
+          <p>이름, 나이, 고향, 방언 권역, 가족 구성원<br>좋아하는 것 (음식, 노래, TV)<br>건강 상태, 복약 목록, 병원 방문 주기</p>
+        </div>
+        <div class="card">
+          <h4>대화 기억</h4>
+          <p>최근 7일 대화 요약 (LLM 자동 생성)<br>주요 에피소드 태그 (손녀 결혼식, 무릎 통증)<br>감정 상태 추이 (weekly)</p>
+        </div>
+        <div class="card">
+          <h4>회고록 데이터</h4>
+          <p>인생 스토리 누적 텍스트<br>주제별 정리 (고향, 직업, 가족, 기억에 남는 순간)</p>
+        </div>
+      </div>
+      <div class="overview-box" style="margin-top:0.8rem;">
+        LLM 프롬프트에 매 대화마다 <strong>기본 프로필 + 최근 7일 요약</strong> 주입 → "지난번에 말씀하셨는데…" 같은 자연스러운 연속성 확보
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">대화 예시 (경상도 어르신)</h3>
+      <div class="overview-box" style="background:#f8fafc; border-left-color:#64748b;">
+        <p style="margin-bottom:0.5rem;"><strong>AI:</strong> "어르신~ 저 하늘이예요! 오늘 많이 추웠지예? 어제 무릎 아프시다 하셨는데 좀 나아지셨어예?"</p>
+        <p style="margin-bottom:0.5rem;"><strong>어르신:</strong> "아이고 하늘아, 오늘은 좀 낫다. 근데 날이 추우니께 또 쑤시는 기라."</p>
+        <p style="margin-bottom:0.5rem;"><strong>AI:</strong> "그라제예~ 추우면 더 심하지예. 따뜻하게 핫팩이라도 붙이고 계시지예? 오늘 점심은 뭐 드셨어예?"</p>
+        <p style="margin-bottom:0.5rem;"><strong>어르신:</strong> "국 끓여 먹었다. 혼자 먹으니께 맛도 없고..."</p>
+        <p><strong>AI:</strong> "아이고, 혼자 드시니 좀 쓸쓸하시지예. 그라도 어르신 국 솜씨가 어디 가겠어예~ 젊었을 때는 요리 잘하셨다 하지 않으셨어예?"</p>
+      </div>
+
+      <h3 style="font-size:1.05rem; font-weight:700; color:var(--navy); margin:1.2rem 0 0.6rem;">대화 품질 관리 원칙</h3>
+      <div class="alert-box" style="background:#fef3c7; border-left-color:#d97706;">
+        <ul style="padding-left:1.2rem; font-size:0.9rem; color:#1a1a1a;">
+          <li><strong>한 번에 질문 하나</strong>: 여러 질문 동시 금지</li>
+          <li><strong>침묵 허용</strong>: 어르신이 생각할 시간 충분히 줌 (3초 이상 기다림)</li>
+          <li><strong>반복 수용</strong>: 같은 이야기 반복해도 처음 듣는 것처럼 반응</li>
+          <li><strong>과도한 긍정 금지</strong>: "너무 좋아요!", "대단해요!" 남발 금지</li>
+          <li><strong>의료 조언 금지</strong>: 증상 언급 시 "병원에 가보시는 게 좋을 것 같아예" 수준으로 제한</li>
+          <li><strong>강요 금지</strong>: 대화하기 싫어하시면 "그러시면 내일 또 전화드릴게예" 하고 종료</li>
+        </ul>
       </div>
     </div>
 
